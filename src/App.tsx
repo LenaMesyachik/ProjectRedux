@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducerType} from "./redux/store";
-import {addMoneyAC, getMoneyAC} from "./redux/Reducers";
+import {addMoneyAC, getMoneyAC} from "./redux/MoneyReducer";
 
 
 function App() {

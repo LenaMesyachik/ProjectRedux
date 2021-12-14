@@ -1,16 +1,16 @@
 export const initialState = {
-    balance: 0
+    customer: []
 }
 /*export type InitialStateType={
     balance:number
 }*/
 type InitialStateType = typeof initialState
-export const Reducers = (state: InitialStateType = initialState, action: AllActionType): InitialStateType => {
+export const CustomerReducer = (state: InitialStateType = initialState, action: AllActionType): InitialStateType => {
     switch (action.type) {
         case 'ADD-MONEY':
-            return {...state, balance: action.addSum + state.balance}
+
         case 'GET-MONEY':
-            return {...state, balance: state.balance - action.getSum}
+
         default:
             return state
     }
