@@ -1,4 +1,4 @@
-import {combineReducers, compose, createStore, Store} from "redux";
+import {combineReducers, createStore, Store} from "redux";
 import {AllActionType, MoneyReducer} from "./MoneyReducer";
 import {CustomerReducer} from "./CustomerReducer";
 import {composeWithDevTools} from "redux-devtools-extension";
@@ -6,7 +6,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 
 export const rootReducer = combineReducers({
     balance: MoneyReducer,
-    customer: CustomerReducer
+    customers: CustomerReducer
 
 })
 

@@ -1,30 +1,39 @@
 export const initialState = {
-    customer: []
+    customers: [ ]
 }
-/*export type InitialStateType={
-    balance:number
-}*/
-type InitialStateType = typeof initialState
+export type CustomersType = {
+    id: number,
+    name: string,
+    age: number
+}
+
+export type InitialStateType = {
+    customers: Array<CustomersType>,
+}
+
 export const CustomerReducer = (state: InitialStateType = initialState, action: AllActionType): InitialStateType => {
     switch (action.type) {
-        case 'ADD-MONEY':
+        case 'ADD-CUSTOMER':
+        return {...state,customers: [...state.customers,action.customer]}
 
-        case 'GET-MONEY':
-
+        case 'DELETE-CUSTOMER':
+return ({...state, customers: [...state.customers.filter(c=> c.id!==action.id)]})
         default:
             return state
     }
 }
-export type AllActionType = addMoneyACType | getMoneyACType
+export type AllActionType = addCustomerACType | deleteCustomerACType
 
-export type addMoneyACType = {
-    type: 'ADD-MONEY',
-    addSum: number
+export type addCustomerACType = {
+    type: 'ADD-CUSTOMER',
+    customer:CustomersType
 }
-export const addMoneyAC = (addSum: number) => ({type: 'ADD-MONEY', addSum} as const)
+export const addCustomerAC = (customer:CustomersType) => ({type: 'ADD-CUSTOMER',customer } as const)
 
-export type getMoneyACType = {
-    type: 'GET-MONEY',
-    getSum: number
+
+
+export type deleteCustomerACType = {
+    type: 'DELETE-CUSTOMER',
+    id:number
 }
-export const getMoneyAC = (getSum: number) => ({type: 'GET-MONEY', getSum} as const)
+export const deleteCustomerAC = (id:number) => ({type: 'DELETE-CUSTOMER',id } as const)
