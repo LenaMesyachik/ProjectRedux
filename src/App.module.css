@@ -1,0 +1,21 @@
+.app {
+    text-align: center;
+}
+
+
+.container {
+    display: flex;
+  justify-content: space-around;
+
+}
+
+.button {
+    align-items: stretch;
+    margin: 55px;
+}
+
+.btn {
+    padding: 20px;
+    font-weight: bold;
+    margin: 15px;
+}

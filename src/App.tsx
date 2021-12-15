@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import './App.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducerType} from "./redux/store";
 import {addMoneyAC, getMoneyAC} from "./redux/MoneyReducer";
-import {addCustomerAC, CustomersType} from "./redux/CustomerReducer";
-
+import {addCustomerAC, CustomersType, deleteCustomerAC} from "./redux/CustomerReducer";
+import s from './App.module.css'
 
 function App() {
 
@@ -20,32 +20,35 @@ function App() {
         dispatch(getMoneyAC(getSum))
     }
     const addCustomer = (value: string) => {
-        const customer = {
+        const customers = [{
             name: value,
-            age: 25,
-            id: 1
+            id: Date.now()
+        }]
+        dispatch(addCustomerAC(customers))
+    }
+        const deleteCustomer = (id: number) => {
+            dispatch(deleteCustomerAC(id))
         }
-        dispatch(addCustomerAC(customer))
-    }
-    const deleteCustomer = (getSum: number) => {
-        dispatch(getMoneyAC(getSum))
-    }
     return (
-        <div className={'app '}>
+        <div className={s.app}>
+        <div className={s.container}>
             <div>{balance}</div>
-            <div style={{display: 'flex'}}>
-                <button onClick={() => addCash(Number(prompt()))}>Add money</button>
-                <button onClick={() => getCash(Number(prompt()))}>Get money</button>
-                <button onClick={() => addCustomer(String(prompt()))}>Add customer</button>
-                <button onClick={() => deleteCustomer(Number(prompt()))}>Delete customer</button>
+            <div className={s.button}>
+                <button className={s.btn} onClick={() => addCash(Number(prompt()))}>Add money</button>
+                <button className={s.btn}  onClick={() => getCash(Number(prompt()))}>Get money</button>
+                <button className={s.btn}  onClick={() => addCustomer(String(prompt()))}>Add customer</button>
+                {/*<button onClick={() => deleteCustomer(String(prompt()))}>Delete customer</button>*/}
             </div>
             <div>
-                {customers.length === 0 ?
+                {customers.length !== 0 ?
                     <div>{customers.map(c =>
-                        <div>{c.name}</div>)}
+                        <div onClick={()=>deleteCustomer(c.id)}>
+                            {c.name}
+                        </div>)}
                     </div> :
-                    <div style={{fontSize: '2rem', marginTop: 20}}> 'No clients! '</div>}
+                    <div> 'No clients! '</div>}
             </div>
+        </div>
         </div>
     );
 }
